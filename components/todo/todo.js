@@ -15,9 +15,6 @@
     vm.todoList = [];
   }
   
-  TodoController.prototype.activate = function() {
-  };
-
   TodoController.prototype.addTodo = function () {
     vm.todoList.push(vm.item);
     vm.item = '';
