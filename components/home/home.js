@@ -2,16 +2,24 @@
   'use strict';
 
   angular
-    .module('TodoApp.components.home', [])
+    .module('TodoApp.components.home', [
+      'TodoApp.service.lists'
+    ])
     .controller('HomeController', HomeController);
 
-  HomeController.$inject = [];
+  HomeController.$inject = ['ListsService'];
 
   var vm;
 
-  function HomeController() {
+  function HomeController(ListsService) {
     console.log('HomeController Constructor');
     vm = this;
-    vm.contents = 'home page';
+    ListsService.query().$promise
+      .then(function (list) {
+        vm.list = list;
+      })
+      .catch(function (e) {
+        console.log(e);
+      });
   }
 })();
